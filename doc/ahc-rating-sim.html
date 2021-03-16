@@ -1,5 +1,6 @@
 <html>
 <head>
+<title>AHC Rating Simulator</title>
 <style>
 body {
 	margin: 32px 32px 0 32px;
@@ -21,18 +22,18 @@ body {
 </head>
 <body>
 <main>
-<div class="wrapper">
-	Q. これはなに<br>
-	A. <a href="https://atcoder.jp/contests/ahc001">AtCoder Heuristics Contest</a> において導入されたレーティング（β版）の変化を入力されたパフォーマンスを元に計算する非公式ツールです。計算は<a href="https://www.dropbox.com/s/ne358pdixfafppm/AHC_rating.pdf?dl=0">こちらの資料</a>に基づいて行われます。バグっていたら <a href="https://twitter.com/shr_pc">@shr_pc</a> までご一報ください<br>
-<div class="wrapper">
-</div>
-	パフォーマンスを適当に区切って入力<br>
-	<textarea id="input" onchange="calc()"></textarea>
-</div>
-<div class="wrapper">
-	レート遷移<br>
-	<textarea id="output"></textarea>
-</div>
+	<div class="wrapper">
+		Q. これはなに<br>
+		A. <a href="https://atcoder.jp/contests/ahc001">AtCoder Heuristics Contest</a> において導入されたレーティング（β版）の変化を入力されたパフォーマンスを元に計算する非公式ツールです。計算は<a href="https://www.dropbox.com/s/ne358pdixfafppm/AHC_rating.pdf?dl=0">こちらの資料</a>に基づいて行われます。バグっていたら <a href="https://twitter.com/shr_pc">@shr_pc</a> までご一報ください<br>
+	<div class="wrapper">
+	</div>
+		パフォーマンスを適当に区切って入力<br>
+		<textarea id="input" onchange="calc()"></textarea>
+	</div>
+	<div class="wrapper">
+		レート遷移<br>
+		<textarea id="output"></textarea>
+	</div>
 </main>
 <script>
 const input = document.getElementById("input");
