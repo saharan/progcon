@@ -1,0 +1,83 @@
+<html>
+<head>
+<style>
+body {
+	margin: 32px 32px 0 32px;
+}
+#input {
+	width: 100%;
+	height: 30%;
+}
+#output {
+	width: 100%;
+	height: 30%;
+	font-size: 1.1rem;
+}
+.wrapper {
+	width: 100%;
+	margin-bottom: 32px;
+}
+</style>
+</head>
+<body>
+<main>
+<div class="wrapper">
+	Q. これはなに<br>
+	A. <a href="https://atcoder.jp/contests/ahc001">AtCoder Heuristics Contest</a> において導入されたレーティング（β版）の変化を入力されたパフォーマンスを元に計算する非公式ツールです。計算は<a href="https://www.dropbox.com/s/ne358pdixfafppm/AHC_rating.pdf?dl=0">こちらの資料</a>に基づいて行われます。バグっていたら <a href="https://twitter.com/shr_pc">@shr_pc</a> までご一報ください<br>
+<div class="wrapper">
+</div>
+	パフォーマンスを適当に区切って入力<br>
+	<textarea id="input" onchange="calc()"></textarea>
+</div>
+<div class="wrapper">
+	レート遷移<br>
+	<textarea id="output"></textarea>
+</div>
+</main>
+<script>
+const input = document.getElementById("input");
+const output = document.getElementById("output");
+const S = 724.4744301;
+const R = 0.8271973364;
+function calc() {
+	const q = [];
+	const ins = input.value.replace(/[^0-9]+/g, " ").trim().split(" ");
+	const ratings = [];
+	const perfs = [];
+	for (const s of ins) {
+		const perf = parseFloat(s);
+		if (!isFinite(perf)) continue;
+		perfs.push(perf);
+		expand(q, perf);
+		q.sort((a, b) => (b - a));
+		ratings.push(compute(q));
+	}
+	output.value = "performances: " + perfs.map(tos).join(" ") + "\nratings:      " + ratings.map(tos).join(" ");
+}
+
+function tos(p) {
+	const pi = Math.round(p);
+	let res = "" + pi;
+	while (res.length < 4) res = " " + res;
+	return res;
+}
+
+function expand(q, perf) {
+	for (let i = 1; i <= 100; i++) {
+		q.push(perf - S * Math.log(i));
+	}
+}
+
+function compute(q) {
+	let denom = 0;
+	let numer = 0;
+	for (let i = 1; i <= 100; i++) {
+		denom += Math.pow(R, i);
+		numer += Math.pow(R, i) * q[i - 1];
+	}
+	const r = numer / denom;
+	return r >= 400 ? r : 400 / Math.exp((400 - r) / 400);
+}
+</script>
+</body>
+</html>
