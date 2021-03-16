@@ -28,7 +28,7 @@ body {
 	<div class="wrapper">
 	</div>
 		パフォーマンスを適当に区切って入力<br>
-		<textarea id="input" onchange="calc()"></textarea>
+		<textarea id="input" onchange="calc()" onkeyup="calc()"></textarea>
 	</div>
 	<div class="wrapper">
 		レート遷移<br>
@@ -42,7 +42,7 @@ const S = 724.4744301;
 const R = 0.8271973364;
 function calc() {
 	const q = [];
-	const ins = input.value.replace(/[^0-9]+/g, " ").trim().split(" ");
+	const ins = input.value.replace(/[^0-9.]+/g, " ").trim().split(" ");
 	const ratings = [];
 	const perfs = [];
 	for (const s of ins) {
